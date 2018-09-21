@@ -280,6 +280,7 @@ enftun_tls_read_packet(struct enftun_tls* tls, struct enftun_packet* pkt)
     size_t len;
 
     len = size_to_read(pkt);
+    enftun_tun_debug("tls: need to read %d bytes\n", len);
     if (len > enftun_packet_tailroom(pkt))
     {
         rc = -EINVAL;
@@ -296,10 +297,12 @@ enftun_tls_read_packet(struct enftun_tls* tls, struct enftun_packet* pkt)
         goto out;
     }
 
+    enftun_log_debug("tls: read %d bytes\n", rc);
     enftun_packet_insert_tail(pkt, rc);
 
     if (size_to_read(pkt) > 0)
     {
+        enftun_log_debug("tls: more bytes needed (%d)\n", size_to_read(pkt));
         rc = -EAGAIN;
         goto out;
     }

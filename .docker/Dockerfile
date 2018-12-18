@@ -7,12 +7,7 @@ RUN apt-get -qq update \
        clang \
        gcc \
        ca-certificates \
-       && rm -rf /var/lib/apt/lists/* \
-       && wget -q https://cmake.org/files/v3.11/cmake-3.11.4-Linux-x86_64.tar.gz \
-       && tar -xzf cmake-3.11.4-Linux-x86_64.tar.gz \
-       && cp -fR cmake-3.11.4-Linux-x86_64/* /usr \
-       && rm -rf cmake-3.11.4-Linux-x86_64 \
-       && rm cmake-3.11.4-Linux-x86_64.tar.gz
+       cmake
 
 #INSTALL DEPENDENCIES
 RUN apt-get update
